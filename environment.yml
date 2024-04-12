@@ -1,0 +1,9 @@
+name: GLIDER
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - folium
+  - gliderpy
+  - nbclassic
+  - pandas

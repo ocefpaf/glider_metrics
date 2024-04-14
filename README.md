@@ -10,8 +10,6 @@ or try it on Google Colab.
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
-CAVEAT: The Colab option will only be work once we finalize the `ioos_metrics` package and make it available on PyPI.
-
 One can modify the query parameters in the second cell of the notebook.
 
 If you wish to clone and install this locally please:

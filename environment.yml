@@ -5,6 +5,7 @@ dependencies:
   - python=3.11
   - folium
   - gliderpy
+  - ioos_metrics
   - matplotlib-base
   - nbclassic
   - pandas

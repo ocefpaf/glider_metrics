@@ -1,5 +1,6 @@
 """Compute glider metrics."""
 
+import httpx
 import pandas as pd
 from gliderpy.fetchers import GliderDataFetcher
 from shapely.geometry import LineString
@@ -15,7 +16,10 @@ def ngdac_gliders(*, min_time, max_time, min_lat, max_lat, min_lon, max_lon):  #
 
     def _extra_info(info_df, attribute_name) -> str:
         """Get 'Attribute Name' 'Value' metadata."""
-        return info_df.loc[info_df["Attribute Name"] == attribute_name]["Value"].squeeze()
+        att = info_df.loc[info_df["Attribute Name"] == attribute_name]["Value"].squeeze()
+        if hasattr(att, "empty"):
+            att = "unknown"
+        return att
 
     def _metadata(info_df) -> dict:
         """Build the metadata a specific dataset_id."""
@@ -110,7 +114,14 @@ def ngdac_gliders(*, min_time, max_time, min_lat, max_lat, min_lon, max_lon):  #
         info_url = row["info_url"].replace("html", "csv")
         info_df = pd.read_csv(info_url)
         info = _metadata(info_df)
-        info.update(_computed_metadata(dataset_id=dataset_id))
+        try:
+            info.update(_computed_metadata(dataset_id=dataset_id))
+        except (httpx.HTTPError, httpx.HTTPStatusError):
+            print(  # noqa: T201
+                f"Could not fetch glider {dataset_id=}. "
+                "This could be a server side error and the metrics will be incomplete!",
+            )
+            continue
         info.update({"track": track})
         metadata.update({dataset_id: info})
     return pd.DataFrame(metadata).T

@@ -12,6 +12,6 @@ metrics = "jupyter nbconvert --to notebook --execute glider_metrics.ipynb --outp
 
 [dependencies]
 python = "3.13.*"
-nbclassic = ">=1.1.0,<2"
 ioos-metrics = ">=0.5.0,<0.6"
+nbclassic = ">=1.1.0,<2"
 nbconvert = ">=7.16.4,<8"

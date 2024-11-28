@@ -1,7 +1,8 @@
-# pixi environments
 *-output.ipynb
 *.egg-info
 .ipynb_checkpoints/
+.jupyterlite.doit.db
 .pixi
+dist/
 glider_metadata_metrics.csv
 metrics.log

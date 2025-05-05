@@ -17,8 +17,10 @@ jobs:
           template-path: .github/ISSUE_TEMPLATE/query.yml
 
       - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > glider_metrics.json
-
-      - run: cat glider_metrics.json
+      - uses: prefix-dev/setup-pixi@v0.8.1
+      - run: >
+          cat glider_metrics.json
+          && pixi run metrics
 
       - name: Close Issue
         run: gh issue close --comment "Done running, closing issue" "1"

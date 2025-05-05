@@ -1,3 +1,4 @@
+
 *-output.ipynb
 *.egg-info
 .ipynb_checkpoints/
@@ -5,5 +6,6 @@
 .pixi
 dist/
 glider_metadata_metrics.csv
+glider_metadata_metrics.md
 glider_metrics.json
 metrics.log

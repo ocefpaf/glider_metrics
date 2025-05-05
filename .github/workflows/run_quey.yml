@@ -14,12 +14,13 @@ jobs:
       - uses: stefanbuck/github-issue-parser@2ea9b35a8c584529ed00891a8f7e41dc46d0441e  # v3.2.1
         id: issue-parser
         with:
-          template-path: .github/ISSUE_TEMPLATE/order-pizza.yml
+          template-path: .github/ISSUE_TEMPLATE/query.yml
 
       - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > glider_metrics.json
 
       - run: cat glider_metrics.json
 
-      - uses: peter-evans/close-issue@276d7966e389d888f011539a86c8920025ea0626  # v3.0.1
-        with:
-          comment: All done!
+      - name: Close Issue
+        run: gh issue close --comment "Done running, closing issue" "1"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,42 @@
+name: Run glider metrics
+description: No-coding option!
+labels: [query]
+
+title: "Glider metrics"
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please provide the bounding box and time-span for the query.
+        Latitude must be between -90 and 90, longitude between -180 and 180, and start/end date in the YYYY-MM-DDTHH:mm:ss format.
+
+  - type: input
+    id: bounding_box
+    attributes:
+      label: Bounding Box Coordinates
+      description: Enter in the format `min_lat, max_lat, min_lon, max_lon`
+      placeholder: -42.0, 42.0, -120.0, -117.0
+    validations:
+      required: true
+
+  - type: input
+    id: datetime_range
+    attributes:
+      label: Date-Time Range
+      description: |
+        Format: start, end`  
+        Use ISO 8601 format: `YYYY-MM-DDTHH:mm:ss`  
+        Example: `2025-01-01T00:00:00, 2025-01-31T23:59:59`
+      placeholder: 2025-01-01T00:00:00, 2025-01-31T23:59:59
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirm-valid
+    attributes:
+      label: Confirmation
+      description: Please confirm the values are correct and within valid range.
+      options:
+        - label: I confirm that the latitude is between -90 and 90, and longitude is between -180 and 180.
+          required: true

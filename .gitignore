@@ -5,4 +5,5 @@
 .pixi
 dist/
 glider_metadata_metrics.csv
+glider_metrics.json
 metrics.log

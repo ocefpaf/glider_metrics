@@ -23,6 +23,6 @@ jobs:
           && pixi run metrics
 
       - name: Close Issue
-        run: gh issue close --comment "Done running, closing issue" "1"
+        run: gh issue close --comment "Done running, closing issue" "${{ github.event.issue.number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

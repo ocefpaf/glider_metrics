@@ -28,7 +28,7 @@ jobs:
 
       - name: Close Issue
         run: >
-          gh issue comment --body-file glider_metadata_metrics.csv "${{ github.event.issue.number }}"
+          gh issue comment --body-file glider_metadata_metrics.md "${{ github.event.issue.number }}"
           && gh issue close "${{ github.event.issue.number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

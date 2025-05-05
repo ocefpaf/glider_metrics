@@ -2,11 +2,12 @@ name: Run glider metrics
 
 on:
   issues:
-    types: [opened]
+    types: [labeled]
 
 concurrency: 'main'
 jobs:
   glider_metrics:
+    if: github.event.label.name == 'run_metrics'
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -26,6 +27,8 @@ jobs:
           && pixi run metrics
 
       - name: Close Issue
-        run: gh issue close --comment "Done running, closing issue" "${{ github.event.issue.number }}"
+        run: >
+          gh issue comment --body-file glider_metadata_metrics.csv "${{ github.event.issue.number }}"
+          && gh issue close "${{ github.event.issue.number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

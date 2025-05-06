@@ -26,6 +26,11 @@ jobs:
           cat glider_metrics.json
           && pixi run metrics
 
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
+        with:
+          name: upload_csv
+          path: ${{ github.workspace }}/glider_metadata_metrics.csv
+          
       - name: Close Issue
         run: >
           gh issue comment --body-file glider_metadata_metrics.md "${{ github.event.issue.number }}"

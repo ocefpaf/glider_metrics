@@ -27,13 +27,14 @@ jobs:
           && pixi run metrics
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02  # v4.6.2
+        id: upload_csv
         with:
           name: upload_csv
           path: ${{ github.workspace }}/glider_metadata_metrics.csv
           
       - name: Close Issue
         run: >
-          gh issue comment --body-file glider_metadata_metrics.md "${{ github.event.issue.number }}"
+          gh issue comment --body "https://github.com/ocefpaf/glider_metrics/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_csv.outputs.artifact-id }}" "${{ github.event.issue.number }}"
           && gh issue close "${{ github.event.issue.number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

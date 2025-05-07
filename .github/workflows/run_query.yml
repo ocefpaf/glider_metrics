@@ -2,7 +2,7 @@ name: Run glider metrics
 
 on:
   issues:
-    types: [ opened, reopened, labeled, edited]
+    types: [ labeled ]
 
 concurrency: 'main'
 jobs:
@@ -34,7 +34,8 @@ jobs:
           
       - name: Close Issue
         run: >
-          gh issue comment --body "[Click here to download the CSV file.](https://github.com/ocefpaf/glider_metrics/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_csv.outputs.artifact-id }})" "${{ github.event.issue.number }}"
+          gh issue comment --body-file summary.md "${{ github.event.issue.number }}"
+          && gh issue comment --body "[Click here to download the CSV file.](https://github.com/ocefpaf/glider_metrics/actions/runs/${{ github.run_id }}/artifacts/${{ steps.upload_csv.outputs.artifact-id }})" "${{ github.event.issue.number }}"
           && gh issue close "${{ github.event.issue.number }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,4 +1,4 @@
-[project]
+[workspace]
 authors = ["Filipe Fernandes <ocefpaf@gmail.com>"]
 channels = ["conda-forge"]
 description = "Run glider metrics notebook"

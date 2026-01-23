@@ -28,8 +28,8 @@ body:
     attributes:
       label: Date-Time Range
       description: |
-        Format: start, end`  
-        Use ISO 8601 format: `YYYY-MM-DDTHH:mm:ss`  
+        Format: start, end`
+        Use ISO 8601 format: `YYYY-MM-DDTHH:mm:ss`
         Example: `2025-01-01T00:00:00, 2025-01-31T23:59:59`
       placeholder: 2025-01-01T00:00:00, 2025-01-31T23:59:59
       value: 2025-01-01T00:00:00, 2025-01-31T23:59:59

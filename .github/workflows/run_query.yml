@@ -1,5 +1,8 @@
 name: Run glider metrics
 
+# no permissions by default
+permissions: {}
+
 on:
   issues:
     types: [ labeled ]
@@ -14,6 +17,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98  # v6.0.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
 
       - uses: stefanbuck/github-issue-parser@10dcc54158ba4c137713d9d69d70a2da63b6bda3  # v3.2.3
         id: issue-parser
@@ -21,7 +27,7 @@ jobs:
           template-path: .github/ISSUE_TEMPLATE/query.yml
 
       - run: echo '${{ steps.issue-parser.outputs.jsonString }}' > glider_metrics.json
-      - uses: prefix-dev/setup-pixi@v0.9.3
+      - uses: prefix-dev/setup-pixi@82d477f15f3a381dbcc8adc1206ce643fe110fb7  # v0.9.3
       - run: >
           cat glider_metrics.json
           && pixi run metrics
@@ -31,7 +37,7 @@ jobs:
         with:
           name: upload_csv
           path: ${{ github.workspace }}/glider_metadata_metrics.csv
-          
+
       - name: Close Issue
         run: >
           gh issue comment --body-file summary.md "${{ github.event.issue.number }}"
